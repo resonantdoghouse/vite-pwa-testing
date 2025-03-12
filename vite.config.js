@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "My PWA App",
-        short_name: "PWA App",
+        name: "Vite PWA Testing",
+        short_name: "Vite PWA",
         description: "A Vite React Progressive Web App",
         theme_color: "#ffffff",
         background_color: "#ffffff",
