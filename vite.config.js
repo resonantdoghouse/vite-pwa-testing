@@ -9,28 +9,32 @@ export default defineConfig({
       registerType: "autoUpdate",
       manifest: {
         name: "Vite PWA Testing",
-        short_name: "Vite PWA",
-        description: "A Vite React Progressive Web App",
-        theme_color: "#ffffff",
+        short_name: "Vite PWA Testing",
+        description: "Catch 'em all!",
+        theme_color: "#ffcc00",
         background_color: "#ffffff",
         display: "standalone",
         icons: [
+          { src: "/pwa-192x192.png", sizes: "192x192", type: "image/png" },
+          { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png" },
+        ],
+      },
+      workbox: {
+        runtimeCaching: [
           {
-            src: "/pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
+            // Cache Pokémon API responses
+            urlPattern: /^https:\/\/pokeapi\.co\/api\/v2\//,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "pokemon-api-cache",
+              expiration: {
+                maxEntries: 50, // Store up to 50 API calls
+                maxAgeSeconds: 60 * 60 * 24, // Cache for 1 day
+              },
+            },
           },
         ],
       },
     }),
   ],
-  server: {
-    https: false, // ✅ Disable HTTPS for local dev
-    port: 5173, // ✅ Ensure it's accessible via http://localhost:5173
-  },
 });
